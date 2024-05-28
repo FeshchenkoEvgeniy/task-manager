@@ -17,7 +17,7 @@ const Logo = () => {
         <StyledLogo width="32px" height="32px">
           <use href={`${sprite}#logo2`} />
         </StyledLogo>
-        <StyledSpanLogo>Task Manager</StyledSpanLogo>
+        <StyledSpanLogo>TaskManager x Weidmann</StyledSpanLogo>
       </StyledWrapper>
     </motion.div>
   );

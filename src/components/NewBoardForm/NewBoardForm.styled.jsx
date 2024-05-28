@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 const NewBoardTitleDynamicStyles = ({ theme }) => css`
   margin: 0 0 24px 0;
-  width: 96px;
+  width: 100px;
   height: 27px;
   left: 24px;
   top: 24px;

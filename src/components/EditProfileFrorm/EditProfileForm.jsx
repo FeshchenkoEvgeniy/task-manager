@@ -87,7 +87,7 @@ const EditProfileForm = ({ userAvatar, onClose }) => {
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Edit profile</Title>
+        <Title>Редагувати профіль</Title>
         <DataForm>
           <Image src={newAvatar || userAvatar} alt="user-avatar" />
           <LabelAvatar>

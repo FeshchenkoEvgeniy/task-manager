@@ -113,7 +113,7 @@ const EditBoardForm = ({ onClose }) => {
 
   return (
     <div>
-      <NewBoardTitle>Edit Board</NewBoardTitle>
+      <NewBoardTitle>Редагувати дошку</NewBoardTitle>
       <form onSubmit={handleSubmit(handleEditBoardForm)}>
         <Input
           id="newBoardInput"
@@ -123,14 +123,14 @@ const EditBoardForm = ({ onClose }) => {
           onChange={handleTitleChange}
         />
 
-        <IconTitle>Icons</IconTitle>
+        <IconTitle>Значки</IconTitle>
         <IconWrap>{renderIcons()}</IconWrap>
 
-        <BackgroundTitle>Background</BackgroundTitle>
+        <BackgroundTitle>Фон</BackgroundTitle>
         <BgIcon>{renderBackgrounds()}</BgIcon>
 
         <FormBtn
-          textBtn={() => <ChildComponent textContent="Edit" />}
+          textBtn={() => <ChildComponent textContent="Редагувати" />}
           type="submit"
         />
       </form>

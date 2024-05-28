@@ -22,7 +22,7 @@ const Filter = () => {
         <FilterIcon>
           <use href={sprite + '#filter'}></use>
         </FilterIcon>
-        <span>Filters</span>
+        <span>Фільтри</span>
       </Filters>
 
       {isModalOpen && (

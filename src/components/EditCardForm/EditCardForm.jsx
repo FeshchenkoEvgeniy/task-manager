@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   CustomRadio,
@@ -21,49 +21,55 @@ import CustomDatePicker from 'components/CustomDatePicker/CustomDatePicker';
 import { NewCardValidationSchema } from 'schemas';
 import { parsedDate } from 'Helpers/CustomDateFormate';
 import { editBoardCard } from 'redux/board/operations';
+import { fetchEmployees } from 'redux/employees/employeeActions';
 
 const EditCardForm = ({ taskInfo, onClose }) => {
-  const { title, description, priority, deadline, _id } = taskInfo;
-  const [deadlineDate, setDeadlineDate] = useState(
-    new Date(parsedDate(deadline))
-  );
+  const { title, description, priority, deadline, _id, assignee } = taskInfo;
+  const [deadlineDate, setDeadlineDate] = useState(new Date(parsedDate(deadline)));
   const [radioChoose, setRadioChoose] = useState(priority);
   const dispatch = useDispatch();
+  const employees = useSelector(state => state.employees.employees);
+  const user = useSelector(state => state.auth.users);
+
+  useEffect(() => {
+    dispatch(fetchEmployees());
+  }, [dispatch]);
 
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: title,
-      description: description,
-      priority: priority,
+      title,
+      description,
+      priority,
+      assignee: assignee?._id || '',
     },
     resolver: yupResolver(NewCardValidationSchema),
   });
 
-  const onSubmit = ({ title, description, lableColor }) => {
+  const onSubmit = async ({ title, description, lableColor, assignee }) => {
+    if (!assignee && employees.length === 0) {
+      assignee = user.id;
+    }
+  
     const deadline = new Intl.DateTimeFormat('en-GB').format(deadlineDate);
-    const newTask = description
-      ? {
-          title,
-          description,
-          priority: lableColor,
-          deadline,
-          _id,
-        }
-      : {
-          title,
-          priority: lableColor,
-          deadline,
-          _id,
-        };
-
+    const newTask = {
+      title,
+      description,
+      priority: lableColor,
+      deadline,
+      assignee,
+      _id,
+    };
+  
+    console.log('Submitting updated task:', newTask);  // Debugging log
+  
     dispatch(editBoardCard(newTask));
     onClose();
   };
+  
 
   const chooseBtn = e => {
     setRadioChoose(e.target.value);
@@ -90,7 +96,7 @@ const EditCardForm = ({ taskInfo, onClose }) => {
               id="low"
               clr="lilac"
               onClick={chooseBtn}
-              checked={radioChoose === 'low' ? true : false}
+              checked={radioChoose === 'low'}
               {...register('lableColor')}
             />
             <label htmlFor="low">
@@ -105,7 +111,7 @@ const EditCardForm = ({ taskInfo, onClose }) => {
               id="medium"
               clr="pink"
               onClick={chooseBtn}
-              checked={radioChoose === 'medium' ? true : false}
+              checked={radioChoose === 'medium'}
               {...register('lableColor')}
             />
             <label htmlFor="medium">
@@ -120,7 +126,7 @@ const EditCardForm = ({ taskInfo, onClose }) => {
               id="high"
               clr="green"
               onClick={chooseBtn}
-              checked={radioChoose === 'high' ? true : false}
+              checked={radioChoose === 'high'}
               {...register('lableColor')}
             />
             <label htmlFor="high">
@@ -135,7 +141,7 @@ const EditCardForm = ({ taskInfo, onClose }) => {
               id="withoutPriority"
               clr="gray"
               onClick={chooseBtn}
-              checked={radioChoose === 'without priority' ? true : false}
+              checked={radioChoose === 'without priority'}
               {...register('lableColor')}
             />
             <label htmlFor="withoutPriority">
@@ -152,7 +158,22 @@ const EditCardForm = ({ taskInfo, onClose }) => {
             setStartDeadline={setDeadlineDate}
           />
         </div>
-
+        {employees.length === 0 ? (
+          <LabelColorText>No employees found, you will be assigned as the assignee</LabelColorText>
+        ) : (
+          <div>
+            <LabelColorText>Assign to</LabelColorText>
+            <select {...register('assignee')}>
+              <option value="">Select Assignee</option>
+              {employees.map(employee => (
+                <option key={employee._id} value={employee._id}>
+                  {employee.firstName} {employee.lastName}
+                </option>
+              ))}
+            </select>
+            <p>{errors.assignee?.message}</p>
+          </div>
+        )}
         <FormBtn textBtn={() => <ChildComponent textContent="Edit" />} />
       </Form>
     </>

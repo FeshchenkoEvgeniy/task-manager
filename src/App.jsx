@@ -16,6 +16,7 @@ const HomePageComponent = lazy(() => import('pages/HomePage'));
 const WelcomePageComponent = lazy(() => import('pages/WelcomePage'));
 const AuthPageComponent = lazy(() => import('pages/AuthPage'));
 const NotFoundPageComponent = lazy(() => import('pages/NotFoundPage'));
+const EmployeesPage = lazy(() => import('pages/EmployeesPage'));
 
 function App() {
   const currentTheme = useAppThemes();
@@ -67,6 +68,14 @@ function App() {
               }
             />
           </Route>
+          <Route
+            path="/employees"
+            element={
+              <PrivateRouteComponent redirectTo="/authentication/login">
+                <EmployeesPage />
+              </PrivateRouteComponent>
+            }
+          />
           <Route path="/" element={<Navigate to="/greetings" />} />
           <Route path="*" element={<NotFoundPageComponent />} />
         </Routes>

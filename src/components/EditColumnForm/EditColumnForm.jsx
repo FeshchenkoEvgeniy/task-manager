@@ -28,12 +28,12 @@ const EditColumnForm = ({ columnId, columnTitle, onClose }) => {
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Edit column</Title>
+        <Title>Редагувати колонку</Title>
         <label>
           <Input autoComplete="off" {...register('title')} />
         </label>
         <FormBtn
-          textBtn={() => <ChildComponent textContent="Edit" />}
+          textBtn={() => <ChildComponent textContent="Редагувати" />}
           type="submit"
         />
       </Form>

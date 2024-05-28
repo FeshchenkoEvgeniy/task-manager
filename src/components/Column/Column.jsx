@@ -21,9 +21,10 @@ import sprite from '../../assets/sprite.svg';
 import SvgComponent from 'components/SvgComponent/SvgComponent';
 import { useFilter } from 'hooks';
 
-function Column({ columnTitle, columnId, cards, prefix }) {
+function Column({ columnTitle, columnId, cards = [], prefix }) {
   const filter = useFilter();
   const filteredCards = filtersCard(cards, filter);
+  console.log(filteredCards)
   const dispatch = useDispatch();
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -73,8 +74,7 @@ function Column({ columnTitle, columnId, cards, prefix }) {
         <Droppable droppableId={`${prefix}`}>
           {provided => (
             <TaskList {...provided.droppableProps} ref={provided.innerRef}>
-              {cards &&
-                filteredCards.length > 0 &&
+              {filteredCards.length > 0 &&
                 filteredCards.map((card, index) => (
                   <Card index={index} item={card} key={card._id} />
                 ))}

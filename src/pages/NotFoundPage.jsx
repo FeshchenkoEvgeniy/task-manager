@@ -1,4 +1,4 @@
 const NotFoundPageComponent = () => {
-  return <div>Not Found</div>;
+  return <div>Не знайдено</div>;
 };
 export default NotFoundPageComponent;

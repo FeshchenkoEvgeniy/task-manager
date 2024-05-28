@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { NavLink } from 'react-router-dom';
 
 const sidebarDynamicStyles = ({ theme }) => css`
   z-index: 1;
@@ -56,4 +57,25 @@ export const StyledSidebar = styled.aside`
 
 export const Container = styled.div`
   ${containerDynamicStyles}
+`;
+
+export const StyledButton = styled(NavLink)`
+  width: 200px;
+  display: block;
+  color: white;
+  background-color: teal;
+  text-decoration: none;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 auto;
+
+  &.active-link {
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: darkslategray;
+  }
 `;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const API_BASE_URL = 'https://task-manager-backend-94yn.onrender.com';
+const API_BASE_URL = 'http://localhost:8682';
 
 const commonHeaders = {
   'Content-Type': 'application/json',

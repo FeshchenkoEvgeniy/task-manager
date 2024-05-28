@@ -33,14 +33,14 @@ const FilterLabels = () => {
   return (
     <FilterModalWindow>
       <Container>
-        <LabelColors>Label colors</LabelColors>
+        <LabelColors>Кольори пріорітетності</LabelColors>
         <ShowAllBtn
           type="button"
           onClick={() => {
             dispatch(updateFilterTasksByPriority('all'));
           }}
         >
-          Show all
+          Показати всі
         </ShowAllBtn>
       </Container>
       <CustomRadioContainer>
@@ -58,7 +58,7 @@ const FilterLabels = () => {
             <svg width="14px" height="14px">
               <use href={sprite + '#radioButtonGray'}></use>
             </svg>
-            <span>Without priority</span>
+            <span>Без пріорітету</span>
           </label>
         </RadioItem>
 
@@ -76,7 +76,7 @@ const FilterLabels = () => {
             <svg width="14px" height="14px">
               <use href={sprite + '#radioButtonLilac'}></use>
             </svg>
-            <span>Low</span>
+            <span>Низький</span>
           </label>
         </RadioItem>
 
@@ -94,7 +94,7 @@ const FilterLabels = () => {
             <svg width="14px" height="14px">
               <use href={sprite + '#radioButtonPink'}></use>
             </svg>
-            <span>Medium</span>
+            <span>Середній</span>
           </label>
         </RadioItem>
 
@@ -112,7 +112,7 @@ const FilterLabels = () => {
             <svg width="14px" height="14px">
               <use href={sprite + '#radioButtonGreen'}></use>
             </svg>
-            <span>High</span>
+            <span>Високий</span>
           </label>
         </RadioItem>
       </CustomRadioContainer>

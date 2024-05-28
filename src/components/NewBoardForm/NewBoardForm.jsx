@@ -97,7 +97,7 @@ const NewBoardForm = ({ onClose }) => {
 
   return (
     <div>
-      <NewBoardTitle>New Board</NewBoardTitle>
+      <NewBoardTitle>Нова дошка</NewBoardTitle>
       <form onSubmit={handleSubmit(handleCreateBoard)}>
         {/* <label htmlFor="newBoardInput">Title</label> */}
         <Input
@@ -109,10 +109,10 @@ const NewBoardForm = ({ onClose }) => {
         />
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
-        <IconTitle>Icons</IconTitle>
+        <IconTitle>Значки</IconTitle>
         <IconWrap>{renderIcons()}</IconWrap>
 
-        <BackgroundTitle>Background</BackgroundTitle>
+        <BackgroundTitle>Фон</BackgroundTitle>
         <BgIcon>{renderBackgrounds()}</BgIcon>
 
         <FormBtn

@@ -1,8 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 import {
   CustomRadio,
   CustomRadioContainer,
@@ -20,15 +19,21 @@ import sprite from '../../assets/sprite.svg';
 import CustomDatePicker from 'components/CustomDatePicker/CustomDatePicker';
 import { NewCardValidationSchema } from 'schemas';
 import { addBoardCard } from 'redux/board/operations';
-import { useColumns } from 'hooks';
+import { fetchEmployees } from 'redux/employees/employeeActions';
 
 const AddCardForm = ({ columnId, onClose }) => {
   const [deadlineDate, setDeadlineDate] = useState(new Date());
   const [radioChoose, setRadioChoose] = useState('without priority');
   const dispatch = useDispatch();
-  const columns = useColumns();
-  const tasksLength = columns.filter(column => column._id === columnId)[0].tasks
-    .length;
+  const columns = useSelector(state => state.board.boardInfo.columns);
+  const employees = useSelector(state => state.employees.employees);
+  const user = useSelector(state => state.auth.users);
+
+  useEffect(() => {
+    dispatch(fetchEmployees());
+  }, [dispatch]);
+
+  const tasksLength = columns.filter(column => column._id === columnId)[0]?.tasks.length || 0;
 
   const {
     register,
@@ -40,34 +45,34 @@ const AddCardForm = ({ columnId, onClose }) => {
       title: '',
       description: '',
       lableColor: '',
+      assignee: '',
     },
     resolver: yupResolver(NewCardValidationSchema),
   });
 
-  const onSubmit = ({ title, description, lableColor }) => {
+  const onSubmit = ({ title, description, lableColor, assignee }) => {
+    if (!assignee && employees.length === 0) {
+      assignee = user.id;
+    }
+  
     const deadline = new Intl.DateTimeFormat('en-GB').format(deadlineDate);
-    const newTask = description
-      ? {
-          title,
-          description,
-          priority: lableColor,
-          deadline,
-          column: columnId,
-          index: tasksLength + 1,
-        }
-      : {
-          title,
-          priority: lableColor,
-          deadline,
-          column: columnId,
-          index: tasksLength + 1,
-        };
-
+    const newTask = {
+      title,
+      description,
+      priority: lableColor,
+      deadline,
+      column: columnId,
+      index: tasksLength + 1,
+      assignee,
+    };
+  
+    console.log('Submitting new task:', newTask);  // Debugging log
+  
     dispatch(addBoardCard(newTask));
     reset();
     onClose();
   };
-
+  
   const chooseBtn = e => {
     setRadioChoose(e.target.value);
   };
@@ -93,7 +98,7 @@ const AddCardForm = ({ columnId, onClose }) => {
               id="low"
               clr="lilac"
               onClick={chooseBtn}
-              checked={radioChoose === 'low' ? true : false}
+              checked={radioChoose === 'low'}
               {...register('lableColor')}
             />
             <label htmlFor="low">
@@ -108,7 +113,7 @@ const AddCardForm = ({ columnId, onClose }) => {
               id="medium"
               clr="pink"
               onClick={chooseBtn}
-              checked={radioChoose === 'medium' ? true : false}
+              checked={radioChoose === 'medium'}
               {...register('lableColor')}
             />
             <label htmlFor="medium">
@@ -123,7 +128,7 @@ const AddCardForm = ({ columnId, onClose }) => {
               id="high"
               clr="green"
               onClick={chooseBtn}
-              checked={radioChoose === 'high' ? true : false}
+              checked={radioChoose === 'high'}
               {...register('lableColor')}
             />
             <label htmlFor="high">
@@ -138,7 +143,7 @@ const AddCardForm = ({ columnId, onClose }) => {
               id="withoutPriority"
               clr="gray"
               onClick={chooseBtn}
-              checked={radioChoose === 'without priority' ? true : false}
+              checked={radioChoose === 'without priority'}
               {...register('lableColor')}
             />
             <label htmlFor="withoutPriority">
@@ -155,7 +160,22 @@ const AddCardForm = ({ columnId, onClose }) => {
             setStartDeadline={setDeadlineDate}
           />
         </div>
-
+        {employees.length === 0 ? (
+          <LabelColorText>No employees found, you will be assigned as the assignee</LabelColorText>
+        ) : (
+          <div>
+            <LabelColorText>Assign to</LabelColorText>
+            <select {...register('assignee')}>
+              <option value="">Select Assignee</option>
+              {employees.map(employee => (
+                <option key={employee._id} value={employee._id}>
+                  {employee.firstName} {employee.lastName}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage>{errors.assignee?.message}</ErrorMessage>
+          </div>
+        )}
         <FormBtn textBtn={() => <ChildComponent textContent="Add" />} />
       </Form>
     </>

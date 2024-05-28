@@ -34,13 +34,13 @@ function HomePageComponent() {
         <>
           <HomePageContainer>
             <HomePageText>
-              Prior to commencing your project, it's crucial&nbsp;
+            Перш ніж розпочати свій проект, дуже важливо&nbsp;
               <HomePageCreateBoardBtn onClick={openModal}>
-                to establish a board
+              створити дошку
               </HomePageCreateBoardBtn>
-              &nbsp; for visualizing and monitoring all required tasks and
-              milestones. This board acts as a potent instrument for structuring
-              the workflow and promoting efficient teamwork among team members.
+              &nbsp;для візуалізації та моніторингу всіх необхідних завдань. 
+              Ця дошка діє як потужний інструмент для структурування
+              робочий процес і сприяння ефективній командній роботі серед членів команди.
             </HomePageText>
           </HomePageContainer>
 
@@ -54,9 +54,9 @@ function HomePageComponent() {
         <>
           <HomePageContainer>
             <HomePageText>
-              Choose your project or&nbsp;
+            Виберіть свій проект або&nbsp;
               <HomePageCreateBoardBtn onClick={openModal}>
-                create a new board
+              створіть нову дошку
               </HomePageCreateBoardBtn>
               .
             </HomePageText>

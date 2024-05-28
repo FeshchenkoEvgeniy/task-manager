@@ -25,7 +25,7 @@ const FilterBackgrounds = () => {
 
   return (
     <>
-      <BackgroundsTitle>Backgrounds</BackgroundsTitle>
+      <BackgroundsTitle>Фон</BackgroundsTitle>
       <BackgroundsList>
         {data.map(item => (
           <BackgroundItem

@@ -64,7 +64,7 @@ const LoginForm = () => {
 
           <p>{errors.password?.message}</p>
         </label>
-        <AuthBtn textBtn="Log In Now" />
+        <AuthBtn textBtn="Увійти" />
       </Form>
     </>
   );

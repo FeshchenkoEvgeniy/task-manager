@@ -5,7 +5,7 @@ import FilterBackgrounds from '../FilterBackgrounds/FilterBackgrounds';
 const FilterModal = ({ onClose }) => {
   return (
     <FilterModalWindow>
-      <FilterTitle>Filters</FilterTitle>
+      <FilterTitle>Фільтри</FilterTitle>
       <FilterBackgrounds />
       <FilterLabels onClose={onClose} />
     </FilterModalWindow>

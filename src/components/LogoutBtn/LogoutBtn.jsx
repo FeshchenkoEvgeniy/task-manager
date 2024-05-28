@@ -20,7 +20,7 @@ const LogoutBtn = () => {
         <Icon width="32px" height="32px">
           <use href={`${sprite}#logout`} />
         </Icon>
-        <StyledSpan>Log out</StyledSpan>
+        <StyledSpan>Вийти</StyledSpan>
       </StyledLogOutBtn>
     </>
   );

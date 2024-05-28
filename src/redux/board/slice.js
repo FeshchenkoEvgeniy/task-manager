@@ -56,14 +56,14 @@ export const boardSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(addBoardCard.fulfilled, (state, action) => {
-        const columnIdUpdate = action.payload.data.taks.column;
+        const columnIdUpdate = action.payload.data.task?.column;
 
         const changedBoardColumn = state.boardInfo.columns.find(
           column => column._id === columnIdUpdate
         );
 
         if (changedBoardColumn) {
-          changedBoardColumn.tasks.push(action.payload.data.taks);
+          changedBoardColumn.tasks.push(action.payload.data.task);
         }
         state.isLoading = false;
       })
@@ -74,8 +74,8 @@ export const boardSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(editBoardCard.fulfilled, (state, action) => {
-        const changeBoardColumnId = action.payload.data.task.column;
-        const changeBoardTaskId = action.payload.data.task._id;
+        const changeBoardColumnId = action.payload.data.task?.column;
+        const changeBoardTaskId = action.payload.data.task?._id;
         const changedBoardColumn = state.boardInfo.columns.find(
           column => column._id === changeBoardColumnId
         );
@@ -90,6 +90,7 @@ export const boardSlice = createSlice({
             changeBoardTask.description = action.payload.data.task.description;
             changeBoardTask.priority = action.payload.data.task.priority;
             changeBoardTask.deadline = action.payload.data.task.deadline;
+            changeBoardTask.assignee = action.payload.data.task.assignee;
           }
         }
         state.isLoading = false;

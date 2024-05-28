@@ -1,5 +1,5 @@
 import { Draggable } from '@hello-pangea/dnd';
-
+import { useSelector } from 'react-redux';
 import * as s from './Card.styled';
 import sprite from '../../assets/sprite.svg';
 import IconList from './IconList/IconList';
@@ -7,6 +7,8 @@ import Details from './Details/Details';
 import DeadlineSignal from './DeadlineSignal/DeadlineSignal';
 
 function Card({ item, index }) {
+  const employees = useSelector(state => state.employees.employees);
+
   const toDeadLine = date => {
     const deadline = Date.parse(
       new Date(date.replace(/(\d+).(\d+).(\d+)/, '$3/$2/$1'))
@@ -15,6 +17,18 @@ function Card({ item, index }) {
 
     return daysLeft;
   };
+
+  const getAssigneeName = assigneeId => {
+    if (typeof assigneeId === 'object' && assigneeId !== null) {
+      assigneeId = assigneeId._id;  // Use assigneeId._id if assigneeId is an object
+    }
+    const assignee = employees.find(employee => employee._id === assigneeId);
+    return assignee ? `${assignee.firstName} ${assignee.lastName}` : 'No Assignee';
+  };
+
+  console.log('Card item:', item);  // Debugging log
+  console.log('Assignee ID:', item.assignee);
+  console.log('Employees:', employees);
 
   return (
     <Draggable draggableId={item._id} index={index}>
@@ -30,6 +44,12 @@ function Card({ item, index }) {
           >
             <s.TaskTitle>{item.title}</s.TaskTitle>
             <s.TaskDescription>{item.description}</s.TaskDescription>
+
+            {item.assignee && (
+              <div>
+                <p>{getAssigneeName(item.assignee)}</p>
+              </div>
+            )}
 
             <s.Box>
               <Details priority={item.priority} deadline={item.deadline} />

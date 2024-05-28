@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
 import { privateJsonAxios } from 'services/axios';
 
 export const getSingleBoard = createAsyncThunk(
@@ -30,10 +29,12 @@ export const addBoardCard = createAsyncThunk(
   'board/addCard',
   async (cardData, thunkAPI) => {
     try {
+      console.log('Sending data to create task:', cardData); // Debugging log
       const { data } = await privateJsonAxios.post(`/api/tasks`, cardData);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.code);
+      console.error('Error in addBoardCard operation:', error); // Log the error
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
@@ -42,15 +43,13 @@ export const editBoardCard = createAsyncThunk(
   'board/editCard',
   async (cardData, thunkAPI) => {
     try {
-      const { title, description, priority, deadline } = cardData;
-      const newTask = { title, description, priority, deadline };
-      const { data } = await privateJsonAxios.put(
-        `/api/tasks/${cardData._id}`,
-        newTask
-      );
+      const { _id, ...updateData } = cardData; // Remove _id from data
+      console.log('Sending data to update task:', updateData); // Debugging log
+      const { data } = await privateJsonAxios.put(`/api/tasks/${_id}`, updateData);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.code);
+      console.error('Error in editBoardCard operation:', error); // Log the error
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
