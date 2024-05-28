@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktask_manager=self.webpackChunktask_manager||[]).push([[520],{4520:function(a,e,n){n.r(e);var r=n(184);e.default=function(){return(0,r.jsx)("div",{children:"\u041d\u0435 \u0437\u043d\u0430\u0439\u0434\u0435\u043d\u043e"})}}}]);
+//# sourceMappingURL=520.fbb5a9b9.chunk.js.map
