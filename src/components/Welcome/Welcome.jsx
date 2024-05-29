@@ -43,7 +43,7 @@ const Welcome = () => {
             animate={titleAnimation.animate}
             transition={titleAnimation.transition}
           >
-            <Title>Task Manager</Title>
+            <Title>Task Manager x Weidmann</Title>
           </motion.div>
         </LogoThumb>
       </Thumb>

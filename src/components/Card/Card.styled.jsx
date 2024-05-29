@@ -27,7 +27,7 @@ export const priorityIndicator = (priority, theme) => {
 
 const dynamicStylesWrapper = ({ priority, theme }) => css`
   position: relative;
-  height: 154px;
+  /* height: 154px; */
   width: 335px;
   padding: 14px 20px 14px 24px;
   border-radius: ${theme.radius.md};
@@ -43,7 +43,7 @@ const dynamicStylesWrapper = ({ priority, theme }) => css`
     position: absolute;
     top: 0;
     left: 0;
-    height: 154px;
+    height: 100%;
     border-left: 4px solid ${priorityIndicator(priority, theme)};
     border-bottom-left-radius: 4px;
     border-top-left-radius: 4px;

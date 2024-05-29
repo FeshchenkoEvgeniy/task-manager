@@ -66,8 +66,6 @@ const AddCardForm = ({ columnId, onClose }) => {
       assignee,
     };
   
-    console.log('Submitting new task:', newTask);  // Debugging log
-  
     dispatch(addBoardCard(newTask));
     reset();
     onClose();
@@ -79,18 +77,18 @@ const AddCardForm = ({ columnId, onClose }) => {
 
   return (
     <>
-      <StyledHeader>Add card</StyledHeader>
+      <StyledHeader>Створити нове завдання</StyledHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label>
-          <Input placeholder="Title" {...register('title')} />
+          <Input placeholder="Назва" {...register('title')} />
           <ErrorMessage>{errors.title?.message}</ErrorMessage>
         </label>
         <label>
-          <TextArea placeholder="Description" {...register('description')} />
+          <TextArea placeholder="Опис" {...register('description')} />
           <ErrorMessage>{errors.description?.message}</ErrorMessage>
         </label>
         <LabelColorBox>
-          <LabelColorText>Label color</LabelColorText>
+          <LabelColorText>Колір пріорітетності виконання завдання</LabelColorText>
           <CustomRadioContainer>
             <CustomRadio
               type="radio"
@@ -154,19 +152,19 @@ const AddCardForm = ({ columnId, onClose }) => {
           </CustomRadioContainer>
         </LabelColorBox>
         <div>
-          <LabelColorText>Deadline</LabelColorText>
+          <LabelColorText>Дедлайн</LabelColorText>
           <CustomDatePicker
             startDeadline={deadlineDate}
             setStartDeadline={setDeadlineDate}
           />
         </div>
         {employees.length === 0 ? (
-          <LabelColorText>No employees found, you will be assigned as the assignee</LabelColorText>
+          <LabelColorText>Співробітників не знайдено, Вас буде призначено виконавцем</LabelColorText>
         ) : (
           <div>
-            <LabelColorText>Assign to</LabelColorText>
+            <LabelColorText>Призначити виконавця</LabelColorText>
             <select {...register('assignee')}>
-              <option value="">Select Assignee</option>
+              <option value="">Виберіть виконавця</option>
               {employees.map(employee => (
                 <option key={employee._id} value={employee._id}>
                   {employee.firstName} {employee.lastName}
@@ -176,7 +174,7 @@ const AddCardForm = ({ columnId, onClose }) => {
             <ErrorMessage>{errors.assignee?.message}</ErrorMessage>
           </div>
         )}
-        <FormBtn textBtn={() => <ChildComponent textContent="Add" />} />
+        <FormBtn textBtn={() => <ChildComponent textContent="Створити завдання" />} />
       </Form>
     </>
   );

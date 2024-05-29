@@ -21,7 +21,7 @@ function AddBoardButton() {
   return (
     <>
       <Wrapper>
-        <Text>Create a new board</Text>
+        <Text>Стоворити нову дошку</Text>
         <Button type="button" onClick={openModal}>
           <Svg width="20px" height="20px">
             <use href={sprite + '#plus'}></use>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addEmployee, updateEmployee } from 'redux/employees/employeeActions';
+import {StyledButton, StyledInput, StyledLabel, StyledForm} from './EmployeeForm.styled'
 
 const EmployeeForm = ({ onAddEmployee, currentEmployee, setCurrentEmployee }) => {
   const [firstName, setFirstName] = useState('');
@@ -48,25 +49,25 @@ const EmployeeForm = ({ onAddEmployee, currentEmployee, setCurrentEmployee }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        First Name:
-        <input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-      </label>
-      <label>
-        Last Name:
-        <input value={lastName} onChange={(e) => setLastName(e.target.value)} />
-      </label>
-      <label>
-        Department:
-        <input value={department} onChange={(e) => setDepartment(e.target.value)} />
-      </label>
-      <label>
-        Specialty:
-        <input value={specialty} onChange={(e) => setSpecialty(e.target.value)} />
-      </label>
-      <button type="submit">{currentEmployee ? 'Update' : 'Save'}</button>
-    </form>
+    <StyledForm onSubmit={handleSubmit}>
+      <StyledLabel>
+        Ім'я:
+        <StyledInput value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+      </StyledLabel>
+      <StyledLabel>
+        Прізвище:
+        <StyledInput value={lastName} onChange={(e) => setLastName(e.target.value)} />
+      </StyledLabel>
+      <StyledLabel>
+        Відділ:
+        <StyledInput value={department} onChange={(e) => setDepartment(e.target.value)} />
+      </StyledLabel>
+      <StyledLabel>
+      Спеціальність:
+        <StyledInput value={specialty} onChange={(e) => setSpecialty(e.target.value)} />
+      </StyledLabel>
+      <StyledButton type="submit">{'Зберегти'}</StyledButton>
+    </StyledForm>
   );
 };
 

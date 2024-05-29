@@ -25,7 +25,7 @@ const AddColumnButton = () => {
               <use href={sprite + '#plus'}></use>
             </Svg>
           </Box>
-          Add another column
+          Додати іншу колонку
         </Button>
       </div>
       {isModalOpen && (

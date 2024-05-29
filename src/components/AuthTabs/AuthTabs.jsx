@@ -28,10 +28,10 @@ const AuthTabs = () => {
       <Tabs selectedIndex={activeTab} onSelect={handleTabChange}>
         <TabList>
           <Tab>
-            <NavLink to="/authentication/register">Registration</NavLink>
+            <NavLink to="/authentication/register">Реєстрація</NavLink>
           </Tab>
           <Tab>
-            <NavLink to="/authentication/login">Log In</NavLink>
+            <NavLink to="/authentication/login">Увійти</NavLink>
           </Tab>
         </TabList>
 

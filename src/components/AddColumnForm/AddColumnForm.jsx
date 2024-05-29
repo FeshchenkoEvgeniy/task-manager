@@ -41,17 +41,17 @@ const AddColumnForm = ({ onClose }) => {
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Title>Add column</Title>
+        <Title>Додати колонку</Title>
         <label>
           <Input
             autoComplete="off"
-            placeholder="Title"
+            placeholder="Назва"
             {...register('title')}
           />
           <ErrorMessage>{errors.title?.message}</ErrorMessage>
         </label>
         <FormBtn
-          textBtn={() => <ChildComponent textContent="Add" />}
+          textBtn={() => <ChildComponent textContent="Додати" />}
           type="submit"
         />
       </Form>

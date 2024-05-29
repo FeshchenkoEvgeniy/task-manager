@@ -19,7 +19,7 @@ function BoardList() {
 
   return (
     <>
-      <Title>My boards</Title>
+      <Title>Мої дошки</Title>
       <AddBoardButton />
       {allBoards.length !== 0 && <ButtonList />}
     </>

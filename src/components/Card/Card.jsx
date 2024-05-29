@@ -26,10 +26,6 @@ function Card({ item, index }) {
     return assignee ? `${assignee.firstName} ${assignee.lastName}` : 'No Assignee';
   };
 
-  console.log('Card item:', item);  // Debugging log
-  console.log('Assignee ID:', item.assignee);
-  console.log('Employees:', employees);
-
   return (
     <Draggable draggableId={item._id} index={index}>
       {(provided, snapshot) => {
@@ -47,7 +43,7 @@ function Card({ item, index }) {
 
             {item.assignee && (
               <div>
-                <p>{getAssigneeName(item.assignee)}</p>
+                <p>Завдання виконує - <b>{getAssigneeName(item.assignee)}</b></p>
               </div>
             )}
 

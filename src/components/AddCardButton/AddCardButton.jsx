@@ -24,7 +24,7 @@ const AddCardButton = ({ columnId }) => {
               <use href={sprite + '#plus'}></use>
             </Svg>
           </Box>
-          Add another card
+          Додати завдання
         </Button>
       </div>
       {isModalOpen && (

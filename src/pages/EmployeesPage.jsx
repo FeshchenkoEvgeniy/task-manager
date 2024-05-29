@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import EmployeeForm from 'components/Employees/EmployeeForm';
 import EmployeeList from 'components/Employees/EmployeeList';
 import { fetchEmployees, deleteEmployee } from 'redux/employees/employeeActions';
+import Header from 'components/Header';
+import Sidebar from 'components/Sidebar';
+import Modal from '../components/ModalWindow/ModalWindow';
+import {StyledButton, StyledTitle} from './styled/EmployeePage.styled'
 
 const EmployeesPage = () => {
   const dispatch = useDispatch();
   const employees = useSelector(state => state.employees.employees) || [];
   const [currentEmployee, setCurrentEmployee] = useState(null);
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchEmployees());
@@ -32,21 +35,78 @@ const EmployeesPage = () => {
     }
   };
 
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const myRef = useRef(null);
+  const [size, setSize] = useState({});
+
+  const resizeHandler = () => {
+    const { clientHeight, clientWidth } = myRef.current || {};
+    setSize({ clientHeight, clientWidth });
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', resizeHandler);
+    resizeHandler();
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (size.clientWidth > 1439) {
+      setIsSidebarOpen(true);
+    } else {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [size.clientWidth]);
+
+  const openSidebar = () => {
+    setIsSidebarOpen(true);
+  };
+
+  const handleClickOutside = e => {
+    const modal = document.getElementById('modal-root');
+    if (!myRef.current.contains(e.target) && !modal.contains(e.target)) {
+      setIsSidebarOpen(false);
+    }
+  };
+
+  const handleOpenModal = () => {
+    setCurrentEmployee(null);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
+    <>
+    <Header openSidebar={openSidebar} />
+    <div ref={myRef}>
+        <Sidebar isOpen={isSidebarOpen} />
+      </div>
     <div>
-      <button onClick={() => navigate(-1)}>Go Back</button>
-      <h1>Employees</h1>
-      <EmployeeForm 
-        onAddEmployee={handleAddEmployee} 
-        currentEmployee={currentEmployee} 
-        setCurrentEmployee={setCurrentEmployee} 
-      />
+      <StyledButton onClick={handleOpenModal}>Add Employee</StyledButton>
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <EmployeeForm
+            onAddEmployee={handleAddEmployee}
+            currentEmployee={currentEmployee}
+            setCurrentEmployee={setCurrentEmployee}
+          />
+        </Modal>
+        <StyledTitle>Список працівників</StyledTitle>
       <EmployeeList 
         employees={employees} 
         onEdit={handleEditEmployee} 
         onDelete={handleDeleteEmployee} 
       />
     </div>
+    </>
   );
 };
 
