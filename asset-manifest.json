@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/task-manager/static/css/main.13ded6ab.css",
-    "main.js": "/task-manager/static/js/main.7d267ac2.js",
+    "main.js": "/task-manager/static/js/main.5f950311.js",
     "static/js/214.3e3858e2.chunk.js": "/task-manager/static/js/214.3e3858e2.chunk.js",
     "static/js/294.a4d5d097.chunk.js": "/task-manager/static/js/294.a4d5d097.chunk.js",
     "static/css/649.d016c122.chunk.css": "/task-manager/static/css/649.d016c122.chunk.css",
@@ -19,7 +19,7 @@
     "static/media/welcome-mobiles.webp": "/task-manager/static/media/welcome-mobiles.f5ad986e8dc99a9fcbe0.webp",
     "index.html": "/task-manager/index.html",
     "main.13ded6ab.css.map": "/task-manager/static/css/main.13ded6ab.css.map",
-    "main.7d267ac2.js.map": "/task-manager/static/js/main.7d267ac2.js.map",
+    "main.5f950311.js.map": "/task-manager/static/js/main.5f950311.js.map",
     "214.3e3858e2.chunk.js.map": "/task-manager/static/js/214.3e3858e2.chunk.js.map",
     "294.a4d5d097.chunk.js.map": "/task-manager/static/js/294.a4d5d097.chunk.js.map",
     "649.d016c122.chunk.css.map": "/task-manager/static/css/649.d016c122.chunk.css.map",
@@ -29,6 +29,6 @@
   },
   "entrypoints": [
     "static/css/main.13ded6ab.css",
-    "static/js/main.7d267ac2.js"
+    "static/js/main.5f950311.js"
   ]
 }
