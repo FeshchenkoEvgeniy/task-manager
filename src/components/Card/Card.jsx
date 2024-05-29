@@ -43,7 +43,7 @@ function Card({ item, index }) {
 
             {item.assignee && (
               <div>
-                <p>Завдання виконує - <b>{getAssigneeName(item.assignee)}</b></p>
+                <s.TaskTitle>Завдання виконує - <b>{getAssigneeName(item.assignee)}</b></s.TaskTitle>
               </div>
             )}
 

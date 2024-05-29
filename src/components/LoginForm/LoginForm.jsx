@@ -45,14 +45,14 @@ const LoginForm = () => {
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label>
-          <Input placeholder="Enter your email" {...register('email')} />
+          <Input placeholder="Введіть адресу електронної пошти" {...register('email')} />
           <p>{errors.email?.message}</p>
         </label>
         <label>
           <div>
             <Input
               type={passwordShown ? 'text' : 'password'}
-              placeholder="Confirm a password"
+              placeholder="Підтвердьте пароль"
               {...register('password')}
             />
             <ShowPassword onClick={togglePasswordVisiblity}>

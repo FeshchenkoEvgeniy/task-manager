@@ -45,18 +45,18 @@ const RegisterForm = () => {
       {isLoading && <Loader />}
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label>
-          <Input placeholder="Enter your name" {...register('name')} />
+          <Input placeholder="Введіть ім'я" {...register('name')} />
           <p>{errors.name?.message}</p>
         </label>
         <label>
-          <Input placeholder="Enter your email" {...register('email')} />
+          <Input placeholder="Введіть адресу електронної пошти" {...register('email')} />
           <p>{errors.email?.message}</p>
         </label>
         <label>
           <div>
             <Input
               type={passwordShown ? 'text' : 'password'}
-              placeholder="Confirm a password"
+              placeholder="Підтвердьте пароль"
               {...register('password')}
             />
             <ShowPassword onClick={togglePasswordVisiblity}>
@@ -67,7 +67,7 @@ const RegisterForm = () => {
           </div>
           <p>{errors.password?.message}</p>
         </label>
-        <AuthBtn textBtn="Register Now" />
+        <AuthBtn textBtn="Зареєструватися" />
       </Form>
     </>
   );

@@ -75,20 +75,21 @@ const EditCardForm = ({ taskInfo, onClose }) => {
     setRadioChoose(e.target.value);
   };
 
+
   return (
     <>
-      <StyledHeader>Edit card</StyledHeader>
+      <StyledHeader>Редагувати завдання</StyledHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label>
-          <Input placeholder="Title" {...register('title')} />
+          <Input placeholder="Назва" {...register('title')} />
           <p>{errors.title?.message}</p>
         </label>
         <label>
-          <TextArea placeholder="Description" {...register('description')} />
+          <TextArea placeholder="Опис" {...register('description')} />
           <p>{errors.description?.message}</p>
         </label>
         <LabelColorBox>
-          <LabelColorText>Label color</LabelColorText>
+          <LabelColorText>Колір пріорітетності виконання завдання</LabelColorText>
           <CustomRadioContainer>
             <CustomRadio
               type="radio"
@@ -152,19 +153,19 @@ const EditCardForm = ({ taskInfo, onClose }) => {
           </CustomRadioContainer>
         </LabelColorBox>
         <div>
-          <LabelColorText>Deadline</LabelColorText>
+          <LabelColorText>Дедлайн</LabelColorText>
           <CustomDatePicker
             startDeadline={deadlineDate}
             setStartDeadline={setDeadlineDate}
           />
         </div>
         {employees.length === 0 ? (
-          <LabelColorText>No employees found, you will be assigned as the assignee</LabelColorText>
+          <LabelColorText>Співробітників не знайдено, Вас буде призначено виконавцем</LabelColorText>
         ) : (
           <div>
-            <LabelColorText>Assign to</LabelColorText>
+            <LabelColorText>Призначити виконавця</LabelColorText>
             <select {...register('assignee')}>
-              <option value="">Select Assignee</option>
+              <option value="">Вибрати працівника</option>
               {employees.map(employee => (
                 <option key={employee._id} value={employee._id}>
                   {employee.firstName} {employee.lastName}
@@ -174,7 +175,7 @@ const EditCardForm = ({ taskInfo, onClose }) => {
             <p>{errors.assignee?.message}</p>
           </div>
         )}
-        <FormBtn textBtn={() => <ChildComponent textContent="Edit" />} />
+        <FormBtn textBtn={() => <ChildComponent textContent="Редагувати" />} />
       </Form>
     </>
   );

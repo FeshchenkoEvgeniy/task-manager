@@ -55,7 +55,7 @@ function ThemeDropdown() {
         onChange={onChange}
         options={options}
         styles={themeSelectStyles}
-        placeholder="Theme"
+        placeholder="Обрати тему"
         isSearchable={false}
         value={selectedOption}
         // menuIsOpen={true}

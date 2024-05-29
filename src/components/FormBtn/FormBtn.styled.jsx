@@ -5,7 +5,7 @@ const dynamicStylesBtn = ({ theme }) => css`
   width: 100%;
   padding: 10px 0 11px;
   border-radius: ${theme.radius.md};
-  margin: 0 auto;
+  margin: 10px auto;
 
   display: flex;
   justify-content: center;

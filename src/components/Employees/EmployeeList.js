@@ -1,21 +1,37 @@
 import React from 'react';
-import {StyledButton, StyledEmployeeContainer, StyledEmployeeRow, StyledEmployeeInfo} from './EmployeeList.styled'
+import { StyledTable, StyledTableRow, StyledTableCell, StyledTableHeader, StyledButton } from './EmployeeList.styled';
 
 const EmployeeList = ({ employees, onEdit, onDelete }) => {
   if (!employees || employees.length === 0) {
-    return <p>No employees found</p>;
+    return <p>Працівників не знайдено</p>;
   }
 
   return (
-    <StyledEmployeeContainer>
-      {employees.map((employee, index) => (
-        <StyledEmployeeRow key={employee?._id || index}>
-          <StyledEmployeeInfo>{employee?.firstName} {employee?.lastName} - {employee?.department} - {employee?.specialty}</StyledEmployeeInfo>
-          <StyledButton onClick={() => onEdit(employee)}>Edit</StyledButton>
-          <StyledButton onClick={() => onDelete(employee._id)}>Delete</StyledButton>
-        </StyledEmployeeRow>
-      ))}
-    </StyledEmployeeContainer>
+    <StyledTable>
+      <thead>
+        <StyledTableRow>
+          <StyledTableHeader>Ім'я</StyledTableHeader>
+          <StyledTableHeader>Прізвище</StyledTableHeader>
+          <StyledTableHeader>Відділ</StyledTableHeader>
+          <StyledTableHeader>Спеціальність</StyledTableHeader>
+          <StyledTableHeader>Дії</StyledTableHeader>
+        </StyledTableRow>
+      </thead>
+      <tbody>
+        {employees.map((employee, index) => (
+          <StyledTableRow key={employee?._id || index}>
+            <StyledTableCell>{employee?.firstName}</StyledTableCell>
+            <StyledTableCell>{employee?.lastName}</StyledTableCell>
+            <StyledTableCell>{employee?.department}</StyledTableCell>
+            <StyledTableCell>{employee?.specialty}</StyledTableCell>
+            <StyledTableCell>
+              <StyledButton onClick={() => onEdit(employee)}>Редагувати</StyledButton>
+              <StyledButton onClick={() => onDelete(employee._id)}>Видалити</StyledButton>
+            </StyledTableCell>
+          </StyledTableRow>
+        ))}
+      </tbody>
+    </StyledTable>
   );
 };
 

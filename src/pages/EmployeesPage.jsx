@@ -6,7 +6,7 @@ import { fetchEmployees, deleteEmployee } from 'redux/employees/employeeActions'
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import Modal from '../components/ModalWindow/ModalWindow';
-import {StyledButton, StyledTitle} from './styled/EmployeePage.styled'
+import {StyledButton, StyledTitle, StyledDiv} from './styled/EmployeePage.styled'
 
 const EmployeesPage = () => {
   const dispatch = useDispatch();
@@ -20,10 +20,12 @@ const EmployeesPage = () => {
 
   const handleAddEmployee = async (employee) => {
     dispatch(fetchEmployees());
+    setIsModalOpen(false);
   };
 
   const handleEditEmployee = (employee) => {
     setCurrentEmployee(employee);
+    setIsModalOpen(true);
   };
 
   const handleDeleteEmployee = async (id) => {
@@ -85,13 +87,13 @@ const EmployeesPage = () => {
   };
 
   return (
-    <>
+    <StyledDiv>
     <Header openSidebar={openSidebar} />
     <div ref={myRef}>
         <Sidebar isOpen={isSidebarOpen} />
       </div>
     <div>
-      <StyledButton onClick={handleOpenModal}>Add Employee</StyledButton>
+      <StyledButton onClick={handleOpenModal}>Додати працівника</StyledButton>
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
           <EmployeeForm
             onAddEmployee={handleAddEmployee}
@@ -106,7 +108,7 @@ const EmployeesPage = () => {
         onDelete={handleDeleteEmployee} 
       />
     </div>
-    </>
+    </StyledDiv>
   );
 };
 
